@@ -1,4 +1,7 @@
 package com.example.api_apartamentos.repository;
 
-public interface ApartamentoRepository {
+import com.example.api_apartamentos.model.Apartamentos;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ApartamentoRepository extends JpaRepository<Apartamentos, Integer> {
 }

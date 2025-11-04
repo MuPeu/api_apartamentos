@@ -1,22 +1,30 @@
 package com.example.api_apartamentos.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 
-@Embeddable
-public class Documento {
+@Entity
+@Table(name = "tb_documentos")
+public class Documentos {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_doc;
+
     @Column(nullable = false)
     private String tipo;
 
     @Column(nullable = false)
     private String numero;
 
-    public Documento() {}
+    public Documentos() {}
 
-    public Documento(String tipo, String numero) {
+    public Documentos(Integer id_doc, String tipo, String numero) {
+        this.id_doc=id_doc;
         this.tipo=tipo;
         this.numero=numero;
     }
+
+    public Integer getIdDocumento() { return id_doc; }
+    public void setIdDocumento(Integer id_doc) { this.id_doc = id_doc; }
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }

@@ -1,12 +1,12 @@
 package com.example.api_apartamentos.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "tb_apartamento")
-
+@Table(name = "tb_apartamentos")
 public class Apartamentos {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_ap;
@@ -15,45 +15,43 @@ public class Apartamentos {
     private String endereco;
 
     @Column(nullable = false)
-    private Integer num_quartos;
+    private Integer numQuartos;
 
     @Column(nullable = false)
-    private Integer area;
+    private Double area;
 
     @Column(nullable = false)
-    private Double preco;
+    private BigDecimal preco;
 
     @Column(nullable = false)
-    private String disp;
+    private Boolean disponivel = true;
 
-    public Apartamentos(){
+    public Apartamentos() {}
 
+    public Apartamentos(Integer id_ap, String endereco, Integer numQuartos, Double area, BigDecimal preco) {
+        this.id_ap=id_ap;
+        this.endereco=endereco;
+        this.numQuartos=numQuartos;
+        this.area=area;
+        this.preco=preco;
+        this.disponivel=true;
     }
 
-    public Apartamentos(Integer id_ap, String endereco, Integer num_quartos, Integer area, Double preco, String disp) {
-        this.id_ap = id_ap;
-        this.endereco = endereco;
-        this.num_quartos = num_quartos;
-        this.area = area;
-        this.preco = preco;
-        this.disp = disp;
-    }
-
-    @JsonProperty("id_ap") public Integer getId() { return id_ap; }
-    @JsonProperty("id_ap") public void setId(Integer id_ap) { this.id_ap = id_ap; }
+    public Integer getIdAp() { return id_ap; }
+    public void setIdAp(Integer id_ap) { this.id_ap = id_ap; }
 
     public String getEndereco() { return endereco; }
     public void setEndereco(String endereco) { this.endereco = endereco; }
 
-    public Integer getNum_quartos() { return num_quartos; }
-    public void setNum_quartos(Integer num_quartos) { this.num_quartos = num_quartos; }
+    public Integer getNumQuartos() { return numQuartos; }
+    public void setNumQuartos(Integer numQuartos) { this.numQuartos = numQuartos; }
 
-    public Integer getArea() { return area; }
-    public void setArea(Integer area) { this.area = area; }
+    public Double getArea() { return area; }
+    public void setArea(Double area) { this.area = area; }
 
-    public Double getPreco() { return preco; }
-    public void setPreco(Double preco) { this.preco = preco; }
+    public BigDecimal getPreco() { return preco; }
+    public void setPreco(BigDecimal preco) { this.preco = preco; }
 
-    public String getDisp() { return disp; }
-    public void setDisp(String disp) { this.disp = disp; }
+    public Boolean isDisponivel() { return disponivel; }
+    public void setDisponivel(Boolean disponivel) { this.disponivel = disponivel; }
 }

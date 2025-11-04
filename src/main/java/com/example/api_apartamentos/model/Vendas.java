@@ -1,40 +1,46 @@
 package com.example.api_apartamentos.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_venda")
-
+@Table(name = "tb_vendas")
 public class Vendas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_venda;
 
     @ManyToOne
-    @JoinColumn(name = "id_ap", nullable = false)
-    private Apartamentos id_ap;
-
-    @ManyToOne
     @JoinColumn(name = "id_compra", nullable = false)
-    private Compradores id_compra;
+    private Compradores comprador;
 
-    public Vendas(){
+    @OneToOne
+    @JoinColumn(name = "id_ap", nullable = false)
+    private Apartamentos apartamento;
+
+    @Column(nullable = false)
+    private LocalDate dataVenda;
+
+    public Vendas() {
 
     }
 
-    public Vendas(Integer id_venda, Apartamentos id_ap, Compradores id_compra){
-        this.id_venda=id_venda;
-        this.id_ap=id_ap;
-        this.id_compra=id_compra;
+    public Vendas(Compradores comprador, Apartamentos apartamento) {
+        this.comprador=comprador;
+        this.apartamento=apartamento;
+        this.dataVenda=LocalDate.now();
     }
 
-    @JsonProperty("id_venda") public Integer getId() { return id_venda; }
-    @JsonProperty("id_venda") public void setId(Integer id_venda) { this.id_venda = id_venda; }
+    public Integer getIdVenda() { return id_venda; }
+    public void setIdVenda(Integer id_venda) { this.id_venda = id_venda; }
 
-    public Apartamentos getAp() { return id_ap; }
-    public void setAp(Apartamentos id_ap) { this.id_ap = id_ap; }
+    public Compradores getComprador() { return comprador; }
+    public void setComprador(Compradores comprador) { this.comprador = comprador; }
 
-    public Compradores getForn() { return id_compra; }
-    public void setForn(Compradores id_compra) { this.id_compra = id_compra; }
+    public Apartamentos getApartamento() { return apartamento; }
+    public void setApartamento(Apartamentos apartamento) { this.apartamento = apartamento; }
+
+    public LocalDate getDataVenda() { return dataVenda; }
+    public void setDataVenda(LocalDate dataVenda) { this.dataVenda = dataVenda; }
 }

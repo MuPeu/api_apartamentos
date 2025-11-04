@@ -1,12 +1,11 @@
 package com.example.api_apartamentos.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_compradores")
-
 public class Compradores {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_compra;
@@ -15,10 +14,7 @@ public class Compradores {
     private String nome;
 
     @Column(nullable = false)
-    private String CPF;
-
-    @Column(nullable = false)
-    private String tele;
+    private String telefone;
 
     @Column(nullable = false)
     private String email;
@@ -26,34 +22,35 @@ public class Compradores {
     @Column(nullable = false)
     private String cidade;
 
-    public Compradores(){
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_documento", nullable = false)
+    private Documentos documento;
 
-    }
+    public Compradores() {}
 
-    public Compradores(Integer id_compra, String nome, String CPF, String tele, String email, String cidade){
-        this.id_compra=id_compra;
+    public Compradores(Integer id_compra, String nome, String telefone, String email, String cidade, Documentos documento) {
         this.nome=nome;
-        this.CPF=CPF;
-        this.tele=tele;
+        this.telefone=telefone;
         this.email=email;
         this.cidade=cidade;
+        this.documento=documento;
     }
 
-    @JsonProperty("id_compra") public Integer getId() { return id_compra; }
-    @JsonProperty("id_compra") public void setId(Integer id_compra) { this.id_compra = id_compra; }
+    public Integer getIdComprador() { return id_compra; }
+    public void setIdComprador(Integer id_compra) { this.id_compra = id_compra; }
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
-    public String getCPF() { return CPF; }
-    public void setCPF(String CPF) { this.CPF = CPF; }
-
-    public String getTele() { return tele; }
-    public void setTele(String tele) { this.tele = tele; }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
     public String getCidade() { return cidade; }
     public void setCidade(String cidade) { this.cidade = cidade; }
+
+    public Documentos getDocumento() { return documento; }
+    public void setDocumento(Documentos documento) { this.documento = documento; }
 }

@@ -1,4 +1,7 @@
 package com.example.api_apartamentos.repository;
 
-public interface CompradorRepository {
+import com.example.api_apartamentos.model.Compradores;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CompradorRepository extends JpaRepository<Compradores, Integer> {
 }
